@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Personal Finance Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Authentication Section -->
+        <div id="auth-section">
+            <div class="auth-container">
+                <h2 class="text-center">Finance Tracker</h2>
+                <p class="text-center subtitle">Manage your finances smarter</p>
+                
+                <div class="tabs">
+                    <div class="tab active" id="login-tab">Login</div>
+                    <div class="tab" id="register-tab">Register</div>
+                </div>
+                
+                <div id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="Enter your password">
+                    </div>
+                    <button type="button" id="login-btn">Login</button>
+                </div>
+                
+                <div id="register-form" class="hidden">
+                    <div class="form-group">
+                        <label for="register-name">Name</label>
+                        <input type="text" id="register-name" placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" placeholder="Create a password">
+                    </div>
+                    <button type="button" id="register-btn">Register</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Application -->
+        <div id="app-section" class="hidden">
+            <header>
+                <h1>Smart Finance Tracker</h1>
+                <p class="subtitle">Welcome, <span id="user-name">User</span>!</p>
+            </header>
+
+            <!-- Summary Section -->
+            <div class="dashboard">
+                <div class="card summary-card">
+                    <i class="fas fa-wallet income-color"></i>
+                    <h3 class="income-color" id="total-income">$0.00</h3>
+                    <p>Total Income</p>
+                </div>
+                <div class="card summary-card">
+                    <i class="fas fa-money-bill-wave expense-color"></i>
+                    <h3 class="expense-color" id="total-expense">$0.00</h3>
+                    <p>Total Expenses</p>
+                </div>
+                <div class="card summary-card">
+                    <i class="fas fa-chart-line balance-color"></i>
+                    <h3 class="balance-color" id="current-balance">$0.00</h3>
+                    <p>Current Balance</p>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <!-- Left Column -->
+                <div>
+                    <!-- Transaction Form -->
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-plus-circle"></i> Add New Transaction
+                        </div>
+                        <div class="transaction-form">
+                            <div class="form-group">
+                                <label for="transaction-type">Type</label>
+                                <select id="transaction-type">
+                                    <option value="income">Income</option>
+                                    <option value="expense">Expense</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="transaction-category">Category</label>
+                                <select id="transaction-category">
+                                    <option value="">Select a category</option>
+                                    <!-- Categories will be populated by JS -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="transaction-amount">Amount ($)</label>
+                                <input type="number" id="transaction-amount" step="0.01" min="0.01" placeholder="Enter amount">
+                            </div>
+                            <div class="form-group">
+                                <label for="transaction-description">Description</label>
+                                <input type="text" id="transaction-description" placeholder="Enter description">
+                            </div>
+                            <div class="form-group">
+                                <label for="transaction-date">Date</label>
+                                <input type="date" id="transaction-date">
+                            </div>
+                            <button type="button" id="add-transaction-btn">Add Transaction</button>
+                        </div>
+                    </div>
+
+                    <!-- Transaction List -->
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-history"></i> Recent Transactions
+                        </div>
+                        <div class="search-box">
+                            <input type="text" id="transaction-search" placeholder="Search transactions...">
+                        </div>
+                        <div class="transaction-list" id="transaction-list">
+                            <!-- Transactions will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div>
+                    <!-- Expense Chart -->
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-chart-pie"></i> Expense Breakdown
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="expense-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Savings Goals -->
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-bullseye"></i> Savings Goals
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <input type="text" id="goal-name" placeholder="Goal name">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" id="goal-target" step="0.01" min="0.01" placeholder="Target amount">
+                            </div>
+                            <button type="button" id="add-goal-btn">Add Goal</button>
+                        </div>
+                        <div id="goals-list">
+                            <!-- Goals will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="logout-btn" id="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
